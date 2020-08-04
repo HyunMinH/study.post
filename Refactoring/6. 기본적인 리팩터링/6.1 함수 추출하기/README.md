@@ -3,10 +3,13 @@
 <br>
 
 ### 절차
+
 1. 함수를 새로 만들고, 목적을 잘 드러내는 이름 붙인다.(무엇을 하는지)
    - 중첩 함수 지원하는 언어 -> 원래 함수 안에 중첩 -> 캡슐화
    - 원래 함수 바깥으로 꺼내야 할 때 -> 추출 함수를 함수 옮기기 적용
+  
 2. 추출한 코드를 원본 함수에서 복사해서 붙임
+
 3. 추출한 코드 중, 원본 함수의 지역 변수 참조 or 추출한 함수의 유효범위 벗어나는 변수 있는지 검사 
    - 있다면 매개변수로 전달
    - 반환할 값이 여러개 -> 각각을 반환하는 함수 여러개 or 레코드로 묶어서 반환
@@ -43,6 +46,7 @@ function printBanner(){
     console.log("################");
 }
 ```
+<br>
 
 ### 지역 변수를 사용할 때
 ```
@@ -65,10 +69,11 @@ function printOwing(invice){
 
 function printDetails(invoice, outStanding){
     cosole.log('고객명: ${invoice.customer}');
-    cosole.log('채무액: ${invoice.customer}');
-    cosole.log('마감일: ${invoice.customer}');
+    cosole.log('채무액: ${outstanding}');
+    cosole.log('마감일: ${invoice.dueDate.toLocaleDateString()}');
 }
 ```
+<br>
 
 
 ### 지역 변수의 값 변경할 때
