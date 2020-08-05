@@ -1,8 +1,10 @@
-## 6.1 함수 추출하기
-### 언제 : 목적과 구현 분리
-<br>
+# 6.1 함수 추출하기
 
-### 절차
+## 언제
+
+1) 목적과 구현 분리
+
+## 절차
 
 1. 함수를 새로 만들고, 목적을 잘 드러내는 이름 붙인다.(무엇을 하는지)
    - 중첩 함수 지원하는 언어 -> 원래 함수 안에 중첩 -> 캡슐화
@@ -10,7 +12,7 @@
   
 2. 추출한 코드를 원본 함수에서 복사해서 붙임
 
-3. 추출한 코드 중, 원본 함수의 지역 변수 참조 or 추출한 함수의 유효범위 벗어나는 변수 있는지 검사 
+3. 추출한 코드 중, 원본 함수의 지역 변수 참조 or 추출한 함수의 유효범위 벗어나는 변수 있는지 검사
    - 있다면 매개변수로 전달
    - 반환할 값이 여러개 -> 각각을 반환하는 함수 여러개 or 레코드로 묶어서 반환
 4. 컴파일
@@ -18,10 +20,9 @@
 6. 테스트
 7. 다른 코드에 방금 추출한 코드와 비슷한게 있는지 확인 -> 잇으면 이를 호출할지 결정
 
-<br>
+## 유효 범위를 벗어나는 변수가 없을 때
 
-### 유효 범위를 벗어나는 변수가 없을 때
-```
+```javascript
 function printOwing(invoice){
     let outStanding = 0;
 
@@ -33,7 +34,7 @@ function printOwing(invoice){
 }
 ```
 
-```
+```javascript
 function printOwing(invoice){
     let outStanding = 0;
 
@@ -46,10 +47,10 @@ function printBanner(){
     console.log("################");
 }
 ```
-<br>
 
-### 지역 변수를 사용할 때
-```
+## 지역 변수를 사용할 때
+
+```javascript
 function printOwing(invice){
     ...
 
@@ -59,25 +60,23 @@ function printOwing(invice){
 }
 ```
 
-```
+```javascript
 function printOwing(invice){
     ...
 
     printDetails(invoice, outStanding)
 }
-    
 
 function printDetails(invoice, outStanding){
-    cosole.log('고객명: ${invoice.customer}');
-    cosole.log('채무액: ${outstanding}');
-    cosole.log('마감일: ${invoice.dueDate.toLocaleDateString()}');
+    console.log('고객명: ${invoice.customer}');
+    console.log('채무액: ${outstanding}');
+    console.log('마감일: ${invoice.dueDate.toLocaleDateString()}');
 }
 ```
-<br>
 
+## 지역 변수의 값 변경할 때
 
-### 지역 변수의 값 변경할 때
-```
+```javascript
 function printOwing(invoice){
     let OutStanding=0;
     ...
@@ -89,7 +88,8 @@ function printOwing(invoice){
     ...
 }
 ```
-```
+
+```javascript
 function pringOwing(invoice){
     ...
     const outStanding = calculateOutstanding(invoice);
