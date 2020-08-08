@@ -21,6 +21,7 @@
     function applyShipping(basePrice, shippingMethod, quantity , discount){
         const shippingPerCase = (basePrice > shippingMethod.discountThreshold) ? shippingMethod.discountedFee : shippingMethod.feePerCase;
         const shippingCost = quantity * shippinPerCase;
+
         const price = basePrice - discount + shippingCost;
         return price;
     }
@@ -66,7 +67,9 @@
     }
     ```
 
-    - 간혹 두 번째 단계에서 사용하면 안 되는 매개변수 있음 -> 각 매개변수를 사용한 결과를 중간 데이터 구조의 필드로 추출, 이 필드 값을 설정하는 문장을 호출한 곳으로 옮기기
+    - 간혹 두 번째 단계에서 사용하면 안 되는 매개변수 있음
+    - -> 각 매개변수를 사용한 결과를 중간 데이터 구조의 필드로 추출(2번째 처리 함수 안)
+    - -> 이 필드 값을 설정하는 문장을 호출한 곳으로 옮기기(1번째 처리 하는 데)
 
     ```java
     private static long countOrders(CommandLine commandLine, String[] args, String fileName){
@@ -81,14 +84,15 @@
         ...
         CommandLine commandLine = new CommandLine();
         String filename = args[args.length -1];
+
         commandLine.onlyCountReady = Stream.of(args).anyMatch(arg -> "-r".equals(arg));
+        return countOrders(commandLine, fileName);
     }
 
     private static long countOrders(CommandLine commandLine, String fileNmae){
         ...
     }
     ```
-
 
 6. 첫 번째 단계 코드를 함수로 추출하면서 중간 데이터 구조 반환하도록
 
@@ -102,7 +106,8 @@
     function calculatePricingData(product, quantity){
         const basePrice = product.basePrice * quantity;
         const discount = Math.max(quantity - product.discountThreshold, 0) * product.basePrice * product.discountRate;
-        return {basePrice:basePrice, quantity: quantity, discount:discount};
+
+        return { basePrice:basePrice, quantity: quantity, discount:discount };
     }
 
     // 두 번째 단계 처리 함수
@@ -116,6 +121,6 @@
     ```java
     static long run(String[] args) throws IOException{
         CommandLine commandLine = new CommandLine(args);
-        return countOrders;
+        return countOrders(commandLine);
     }
     ```
