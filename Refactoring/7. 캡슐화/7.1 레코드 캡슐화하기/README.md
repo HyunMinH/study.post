@@ -15,6 +15,10 @@
         constructor(data){
             this._data =data;
         }
+
+        get Data(){
+            return this._data;
+        }
     }
 
     // 최상위
