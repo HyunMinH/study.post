@@ -10,17 +10,17 @@
 
 1. 제어 플래그를 사용하는 코드를 함수로 추출(6.1)할지 고민
 
-```javascript
-checkForMiscreants(people);
-...
+    ```javascript
+    checkForMiscreants(people);
+    ...
 
-function checkForMiscreants(people){
-    let found = flase;
-    for(const p of people){
-        ...
+    function checkForMiscreants(people){
+        let found = flase;
+        for(const p of people){
+            ...
+        }
     }
-}
-```
+    ```
 
 2. 제어 플래그를 갱신하는 코드 각각을 적절한 제어문(return, break, continue)으로 바꾼다. (하나 바꿀 때마다 테스트)
 
