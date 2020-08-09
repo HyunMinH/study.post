@@ -38,9 +38,8 @@
     }
     ```
 
-> 취향에 따라
+> 취향에 따라 아래처럼 바꿀 수 있다.
 > ```javascript
 > charge = summer() ? summerCharge() : regularCharge();
 > ...
 > ```
-> 위처럼 바꿀 수 있다.
