@@ -34,11 +34,11 @@
 
 5) 표현식 들어갈만 한곳 3-4번 반복 적용
 
-    ```
+    ```javascript
     function price(order){
-        const basePrice = order.quantity * order.itemPrice; // 1번째, 만든 후 basePrice 쓰이는 곳 모두 대체
-        const quantitiy Discount = Math.max(0, order.quantity - 500) * order.itemPrice * 0.05; // 2번째
-        const shiping = Math.min(basePrice * 0.1, 100); // 3번째
+        const basePrice = order.quantity * order.itemPrice;
+        const quantitiy Discount = Math.max(0, order.quantity - 500) * order.itemPrice * 0.05; 
+        const shiping = Math.min(basePrice * 0.1, 100); 
         return basePrice - quantityDiscount + shipping;
     }
     ```
