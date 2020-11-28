@@ -14,27 +14,27 @@
 
 3) 각 호출문을 -> 함수 본문으로 교체
 
-```javascript
-function reportLines(aCustomer){
-    const lines = [];
-    gatherCustomerData(lines, aCustomer);
-    return lines;
-}
+    ```javascript
+    function reportLines(aCustomer){
+        const lines = [];
+        gatherCustomerData(lines, aCustomer);
+        return lines;
+    }
 
-function gatherCustomerData(out, aCustomer){
-    out.push(["name", aCustomer.name]);
-    out.push(["location", aCustomer.location]);
-}
-```
+    function gatherCustomerData(out, aCustomer){
+        out.push(["name", aCustomer.name]);
+        out.push(["location", aCustomer.location]);
+    }
+    ```
 
-```javascript
-function reportLines(aCustomer){
-    const lines = [];
-    lines.push(["name", aCustomer.name]); // 1번째로 옮긴 후
-    lines.push("[location", aCustomer.location]); // 2번째로 옮기기
-    return lines;
-}
-```
+    ```javascript
+    function reportLines(aCustomer){
+        const lines = [];
+        lines.push(["name", aCustomer.name]); // 1번째로 옮긴 후
+        lines.push("[location", aCustomer.location]); // 2번째로 옮기기
+        return lines;
+    }
+    ```
 
 4) 호출문 하나 교체마다 테스트
 

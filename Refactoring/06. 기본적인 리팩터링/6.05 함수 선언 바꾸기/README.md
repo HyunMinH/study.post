@@ -66,7 +66,7 @@
 
 4) 테스트
 
-5) 기존 함수 인라인 (-> 예전 함수 호출하는 부분 모두 새 함수를 호출하도록 바뀜)
+5) 기존 함수 인라인하여 호출 코드들이 새 함수 이용하도록 한다.
 
     ```javascript
     addReservation(aCustomer);
@@ -77,33 +77,40 @@
     ```
 
 6) 임시 이름 -> 함수 선언 바꾸기 적용하여 원래 이름으로
-
+    
+    ```javascript
+    function addReservation(customer, isPriority){
+        assert(isPriority === true || isPriority === false);
+        this._reservations.push(customer);
+    }
+    ```
+    
 7) 테스트
 
 
 ## 매개변수 속성으로 바꾸기(마이그레이션)
 
-    ```javascript
-    function inNewEngland(aCustomer){
-        return ["MA", "CT", "ME", "VT", "NH", "RI"].includes(aCustomer.address.state);
-    }
-    ```
+```javascript
+function inNewEngland(aCustomer){
+    return ["MA", "CT", "ME", "VT", "NH", "RI"].includes(aCustomer.address.state);
+}
+```
 
-    ```javascript
-    function inNewEngland(aCustomer){
-        const State = aCustomer.address.state; // 1. 리팩터링, 변수 추출
-        return xxNewinNewEngland(stateCode); 
-    }
+```javascript
+function inNewEngland(aCustomer){
+    const State = aCustomer.address.state; // 1. 리팩터링, 변수 추출
+    return xxNewinNewEngland(stateCode); 
+}
 
-    // 2. 함수 추출
-    function xxNewinNewEngland(stateCode){
-        return ["MA", "CT", "ME", "VT", "NH", "RI"].includes(stateCode);
-    }
-    ```
+// 2. 함수 추출
+function xxNewinNewEngland(stateCode){
+    return ["MA", "CT", "ME", "VT", "NH", "RI"].includes(stateCode);
+}
+```
 
-    ```javascript
-    // 함수 인라인 후 함수 선언 바꾸기 적용
-    function inNewEngland(stateCode){
-        return ["MA", "CT", "ME", "VT", "NH", "RI"].includes(stateCode);
-    }
-    ```
+```javascript
+// 함수 인라인 후 함수 선언 바꾸기 적용
+function inNewEngland(stateCode){
+    return ["MA", "CT", "ME", "VT", "NH", "RI"].includes(stateCode);
+}
+```

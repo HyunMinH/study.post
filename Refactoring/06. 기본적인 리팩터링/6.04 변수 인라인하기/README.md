@@ -12,22 +12,22 @@
 
 2) 대입값 한번만 적용되는지 확인하기 위해, 불변으로 만든 후 테스트
 
-```javascript
-const basePrice = anOrder.basePrice;
-...
-```
+    ```javascript
+    const basePrice = anOrder.basePrice;
+    ...
+    ```
 
 3) 이 변수 가장 처음 사용하는 곳 -> 대입문 우변의 코드로 바꾸기
 
-```javascript
-const basePrice = anOrder.basePrice;
-return (basePrice > 1000);
-```
+    ```javascript
+    const basePrice = anOrder.basePrice;
+    return (basePrice > 1000);
+    ```
 
-```javascript
-const basePrice = anOrder.basePrice;
-return anOrder.basePrice > 1000;
-```
+    ```javascript
+    const basePrice = anOrder.basePrice;
+    return anOrder.basePrice > 1000;
+    ```
 
 4) 테스트
 
@@ -35,8 +35,8 @@ return anOrder.basePrice > 1000;
 
 6) 변수 선언문 및 대입문 삭제
 
-```javascript
-return anOrder.basePrice > 1000;
-```
+    ```javascript
+    return anOrder.basePrice > 1000;
+    ```
 
 7) 테스트
