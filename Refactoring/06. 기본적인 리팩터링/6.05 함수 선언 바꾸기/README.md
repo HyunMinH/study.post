@@ -6,10 +6,6 @@
 
 2) 매개변수 추가/삭제 하고 싶을 때
 
-    - 매개변수가 단순 값 -> 범용적
-    - 매개변수가 객체 -> 객체의 인터페이스와 결합됨. 하지만 변경 시 호출하는 곳 일일이 찾아 변경할 필요 x -> 실질적으로 캡슐화 수준 UP
-    - 은총알은 없다.
-
 ## 절차
 
 ### 간단한 절차
@@ -17,6 +13,19 @@
 1) 매개변수 제거시 -> 함수 본문에서 제거 대상 매개변수 참조하는 곳 확인
 
 2) 메서드 선언 원하는 형태로 바꾸기
+
+    ``` javascript
+    function circum(radius){
+        return 2 * Math.PI * radius
+    }
+    ```
+
+    ```javascript
+    function circumference(radius){
+        return 2 * Math.PI * radius;
+    }
+
+    ```
 
 3) 기존 메서드 호출하는 부분 모두 찾아 바뀐 형태로 호출
 
@@ -31,64 +40,70 @@
 1) 함수의 본문 적절히 리팩터링(-> 이후 과정 쉽게하기 위해)
 
 2) 함수 본문 새로운 함수로 추출 (이름 임시로)
+
+    ```javascript
+    function addReservation(customer){
+        zz_addReservation(customer);
+    }
+
+    function zz_addReservation(customer){
+        this._reservations.push(customer);
+    }
+    ```
+
 3) 추출한 함수에 매개변수 추가해야함 -> '간단한 절차' 적용
+
+    ```javascript
+    function addReservation(customer){
+        zz_addReservation(customer, false);
+    }
+
+    function zz_addReservation(customer, isPriority){
+        assert(isPriority === true || isPriority === false);
+        this._reservations.push(customer);
+    }
+    ```
+
 4) 테스트
+
 5) 기존 함수 인라인 (-> 예전 함수 호출하는 부분 모두 새 함수를 호출하도록 바뀜)
+
+    ```javascript
+    addReservation(aCustomer);
+    ```
+
+    ```javascript
+    zz_addReservation(customer, false);
+    ```
+
 6) 임시 이름 -> 함수 선언 바꾸기 적용하여 원래 이름으로
+
 7) 테스트
 
-## 함수 이름 바꾸기(간단한 절차)
 
-``` javascript
-function circum(radius){
-    return 2 * Math.PI * radius
-}
+## 매개변수 속성으로 바꾸기(마이그레이션)
 
-function circumference(radius){
-    return 2 * Math.PI * radius;
-}
+    ```javascript
+    function inNewEngland(aCustomer){
+        return ["MA", "CT", "ME", "VT", "NH", "RI"].includes(aCustomer.address.state);
+    }
+    ```
 
-// 호출하는 곳 모두 바꾼 이름오로 호출하도록
-```
+    ```javascript
+    function inNewEngland(aCustomer){
+        const State = aCustomer.address.state; // 1. 리팩터링, 변수 추출
+        return xxNewinNewEngland(stateCode); 
+    }
 
-## 함수 이름 바꾸기(마이그레이션 절차)
+    // 2. 함수 추출
+    function xxNewinNewEngland(stateCode){
+        return ["MA", "CT", "ME", "VT", "NH", "RI"].includes(stateCode);
+    }
+    ```
 
-```javascript
-function circum(radius){
-    return circumference(radius);
-}
-
-function circumference(radius){
-    return 2 * Math.PI * radius;
-}
-
-// 테스트 후 예전 함수를 인라인 
-// 호출하는 곳 모두 바꾸면 기존 함수 삭제
-```
-
-## 매개변수 속성으로 바꾸기
-
-```javascript
-function inNewEngland(aCustomer){
-    return ["MA", "CT", "ME", "VT", "NH", "RI"].includes(aCustomer.address.state);
-}
-```
-
-```javascript
-function inNewEngland(aCustomer){
-    const State = aCustomer.address.state; // 1. 리팩터링, 변수 추출
-    return xxNewinNewEngland(stateCode); 
-}
-
-// 2. 함수 추출
-function xxNewinNewEngland(stateCode){
-    return ["MA", "CT", "ME", "VT", "NH", "RI"].includes(stateCode);
-}
-```
-
-```javascript
-// 함수 인라인 후 함수 선언 바꾸기 적용
-function inNewEngland(stateCode){
-    return ["MA", "CT", "ME", "VT", "NH", "RI"].includes(stateCode);
-}
-```
+    ```javascript
+    // 함수 인라인 후 함수 선언 바꾸기 적용
+    function inNewEngland(stateCode){
+        return ["MA", "CT", "ME", "VT", "NH", "RI"].includes(stateCode);
+    }
+    ```
