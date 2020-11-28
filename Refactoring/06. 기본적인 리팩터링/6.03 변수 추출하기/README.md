@@ -8,7 +8,7 @@
 
 1) 추출하려는 표현식에 부작용은 없는지 확인
 
-2) 불변 변수를 하나 선언, <- 표현식 복제본 대입
+2) 불변 변수를 하나 선언하고 표현식 복제본 대입
 
 ```javascript
 function price(order){
@@ -19,7 +19,7 @@ function price(order){
 }
 ```
 
-3) 원본 표현식 -> 새로 만든 변수로 교체
+3) 원본 표현식을 새로 만든 변수로 교체
 
 ```javascript
 function price(order){
@@ -32,7 +32,7 @@ function price(order){
 
 4) 테스트
 
-5) 표현식 들어갈만 한곳 모두 3,4번 반복 적용
+5) 표현식 들어갈만 한곳 3-4번 반복 적용
 
 ```
 function price(order){
